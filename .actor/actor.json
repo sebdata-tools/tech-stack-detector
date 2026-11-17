@@ -1,0 +1,17 @@
+{
+    "actorSpecification": 1,
+    "name": "tech-stack-detector",
+    "title": "Website Tech Stack Detector: Technologies with Evidence",
+    "description": "Give it a list of websites and get the technologies each one runs on: CMS, shop platform, frameworks, CDN, hosting, analytics, pixels, chat, payment and more. Every detection shows the evidence that proves it (the header, script URL, cookie or tag that matched).",
+    "version": "0.1",
+    "buildTag": "latest",
+    "defaultMemoryMbytes": 512,
+    "minMemoryMbytes": 256,
+    "maxMemoryMbytes": 1024,
+    "dockerfile": "../Dockerfile",
+    "input": "./input_schema.json",
+    "output": "./output_schema.json",
+    "storages": {
+        "dataset": "./dataset_schema.json"
+    }
+}

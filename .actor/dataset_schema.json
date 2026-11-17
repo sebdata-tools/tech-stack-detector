@@ -1,0 +1,54 @@
+{
+    "actorSpecification": 1,
+    "fields": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+            "website": { "type": "string", "description": "The address as given in the input." },
+            "finalUrl": { "type": "string", "description": "The address that answered, after redirects." },
+            "statusCode": { "type": "integer", "description": "HTTP status of the answer." },
+            "blocked": { "type": "boolean", "description": "True when the site answered with a bot challenge or refused access. Such a row holds only what the response headers reveal and is not charged." },
+            "blockedReason": { "type": "string", "description": "Only on blocked rows, e.g. \"Cloudflare challenge page\"." },
+            "technologyCount": { "type": "integer" },
+            "technologies": {
+                "type": "array",
+                "description": "Every technology detected, with the evidence for it.",
+                "items": {
+                    "type": "object",
+                    "properties": {
+                        "name": { "type": "string" },
+                        "category": { "type": "string" },
+                        "version": { "type": ["string", "null"], "description": "Only when the evidence shows one." },
+                        "confidence": { "type": "string", "enum": ["high", "medium"] },
+                        "evidence": { "type": "string", "description": "What matched, e.g. \"header server: nginx\", \"script src: cdn.shopify.com/...\", \"meta generator: WordPress 6.5\", \"cookie name: _ga\", or \"implied by Next.js (...)\"." }
+                    },
+                    "required": ["name", "category", "confidence", "evidence"]
+                }
+            },
+            "categories": { "type": "object", "description": "Category -> names of the technologies found in it." },
+            "checkedAt": { "type": "string", "description": "When the site was checked, ISO 8601 UTC." }
+        },
+        "required": ["website", "finalUrl", "statusCode", "blocked", "technologies", "categories", "checkedAt"]
+    },
+    "views": {
+        "overview": {
+            "title": "Websites",
+            "transformation": {
+                "fields": ["website", "finalUrl", "statusCode", "blocked", "technologyCount", "categories", "technologies", "checkedAt"]
+            },
+            "display": {
+                "component": "table",
+                "properties": {
+                    "website": { "label": "Website", "format": "text" },
+                    "finalUrl": { "label": "Final address", "format": "link" },
+                    "statusCode": { "label": "Status", "format": "number" },
+                    "blocked": { "label": "Blocked", "format": "boolean" },
+                    "technologyCount": { "label": "Technologies", "format": "number" },
+                    "categories": { "label": "By category", "format": "object" },
+                    "technologies": { "label": "Detections with evidence", "format": "array" },
+                    "checkedAt": { "label": "Checked at", "format": "date" }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,22 @@
+{
+    "title": "Tech Stack Detector input",
+    "type": "object",
+    "schemaVersion": 1,
+    "properties": {
+        "websites": {
+            "title": "Websites",
+            "type": "array",
+            "description": "One per line, up to 1,000. A domain (allbirds.com) or a full address (https://www.allbirds.com). The homepage is checked unless you give a longer address. One request per website.",
+            "editor": "stringList",
+            "prefill": ["https://www.allbirds.com", "wordpress.org", "nextjs.org"]
+        },
+        "proxyConfiguration": {
+            "title": "Proxy",
+            "type": "object",
+            "description": "Optional. Most websites answer without a proxy. Sites behind a bot challenge are reported as blocked (not charged); a residential proxy can get past some of them.",
+            "editor": "proxy",
+            "sectionCaption": "Advanced"
+        }
+    },
+    "required": ["websites"]
+}

@@ -1,0 +1,18 @@
+{
+    "actorOutputSchemaVersion": 1,
+    "title": "Output of the Actor",
+    "properties": {
+        "results": {
+            "type": "string",
+            "title": "Results",
+            "description": "All rows saved by the run (the default dataset).",
+            "template": "{{links.apiDefaultDatasetUrl}}/items"
+        },
+        "summary": {
+            "type": "string",
+            "title": "Run summary",
+            "description": "Counts, and every input that could not be read with its reason (SUMMARY record in the default key-value store).",
+            "template": "{{links.apiDefaultKeyValueStoreUrl}}/records/SUMMARY"
+        }
+    }
+}
